@@ -1,4 +1,4 @@
 console.log("Hello World")
-let name="student"
-console.log("Hello"+name)
+let name="jane"
+console.log("Hello " +name)
           
