@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Todo List</title>
+<style>
+body{font-family:Arial;padding:20px}
+.done{text-decoration:line-through;color:gray}
+li{margin:8px 0;cursor:pointer}
+button{margin-left:10px}
+</style>
+</head>
+<body>
+<h1>My Todo List</h1>
+<input id="taskInput" placeholder="Add new task...">
+<button id="addBtn">Add Task</button>
+<ul id="taskList"></ul>
+<p id="count">Total tasks: 0</p>
+<script>
+const input = document.getElementById('taskInput');
+const addBtn = document.getElementById('addBtn');
+const list = document.getElementById('taskList');
+const count = document.getElementById('count');
+function updateCount(){
+  count.textContent = 'Total tasks: ' + list.children.length;
+}
+addBtn.addEventListener('click', function(){
+  const text = input.value.trim();
+  if(text === '') return;
+  const li = document.createElement('li');
+  li.textContent = text;
+  li.addEventListener('click', function(){
+    li.classList.toggle('done');
+  });
+  const delBtn = document.createElement('button');
+  delBtn.textContent = 'Delete';
+  delBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    li.remove();
+    updateCount();
+  });
+  li.appendChild(delBtn);
+  list.appendChild(li);
+  input.value = '';
+  updateCount();
+});
+</script>
+</body>
+</html>
